@@ -40,8 +40,7 @@ dateTimePicker.addEventListener("input", () => {
         backgroundColor: '#ef4040',
         messageColor: '#fff',
         titleColor: '#fff',
-        icon: '../img/close.png',
-        iconUrl: "../img/alert-sign.png",
+        iconUrl: "./img/alert-sign.png",
       message: "Illegal operation",
     });
   } else {
