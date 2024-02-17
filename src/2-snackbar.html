@@ -6,13 +6,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snackbar</title>
+  <link class="ok" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
   <section>
     <a href="./index.html">Go back</a>
     <h1>Snackbar</h1>
+    <form class="form">
+      <label class="label-form">
+        Delay (ms)
+        <input class="snackbar-input" type="number" name="delay" required />
+      </label>
+
+      <fieldset>
+        <legend>State</legend>
+        <label>
+          <input type="radio" name="state" value="fulfilled" required />
+          Fulfilled
+        </label>
+        <label>
+          <input type="radio" name="state" value="rejected" required />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button class="snackbar-btn" type="submit">Create notification</button>
+    </form>
   </section>
+  <script src="./js/2-snackbar.js" type="module"></script>
 </body>
 
 </html>

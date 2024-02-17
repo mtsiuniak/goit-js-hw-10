@@ -70,3 +70,57 @@
   color: #989898;
   background: #cfcfcf;;
 }
+.snackbar-btn {
+  margin-top: 24px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  background: #4e75ff;
+  border: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5%;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.snackbar-btn:hover {
+  background: #6C8CFF;
+}
+
+.form {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  width: 360px;
+  height: auto;
+}
+
+.snackbar-input {
+  box-sizing: border-box;
+  margin: 0 0 16px 0;
+  display: block;
+  width: 360px;
+  height: 40px;
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+}
+fieldset {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 8px;
+  padding-top: 16px;
+}
