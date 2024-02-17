@@ -2,7 +2,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-
+import alertIcon from "../img/alert-sign.png";
 
 const dateTimePicker = document.getElementById("datetime-picker");
 const startBtn = document.getElementById("start-btn");
@@ -12,6 +12,7 @@ const minutesValue = document.querySelector("span[data-minutes]");
 const secondsValue = document.querySelector("span[data-seconds]");
 
 let countdownInterval;
+let userSelectedDate;
 
 const options = {
   enableTime: true,
@@ -19,39 +20,34 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-};
-
-flatpickr(dateTimePicker, options)
-
-const addLeadingZero = (value) => {
-  return value < 10 ? "0" + value : value;
-};
-
-dateTimePicker.addEventListener("input", () => {
-  const selectedDate = new Date(dateTimePicker.value);
+    userSelectedDate = selectedDates[0];
     const currentDate = new Date();
-  
-  if (selectedDate < currentDate) {
-    startBtn.disabled = true;
+    if (userSelectedDate <= currentDate) {
+      startBtn.disabled = true;
       iziToast.error({
         title: "Error",
         backgroundColor: '#ef4040',
         messageColor: '#fff',
         titleColor: '#fff',
-        iconUrl: "./img/alert-sign.png",
-      message: "Illegal operation",
-    });
-  } else {
-    startBtn.disabled = false;
-  }
-});
+        iconUrl: alertIcon,
+        message: "Please, choose date in the future!",
+      });
+    } else {
+      startBtn.disabled = false;
+    }
+  },
+};
+
+flatpickr(dateTimePicker, options);
+
+const addLeadingZero = (value) => {
+  return value < 10 ? "0" + value : value;
+};
 
 startBtn.disabled = true;
 startBtn.addEventListener("click", () => {
-
-    const endDate = new Date(dateTimePicker.value).getTime();
+  if (countdownInterval) return; 
+  const endDate = userSelectedDate.getTime();
 
   countdownInterval = setInterval(() => {
     const currentDate = new Date().getTime();
@@ -64,9 +60,10 @@ startBtn.addEventListener("click", () => {
       minutesValue.textContent = "00";
       secondsValue.textContent = "00";
       iziToast.success({
-        title: "Success",
-        message: "Countdown finished!",
+        title: "Успішно",
+        message: "Таймер завершено!",
       });
+      countdownInterval = null;
     } else {
       const { days, hours, minutes, seconds } = convertMs(remainingTime);
       daysValue.textContent = addLeadingZero(days);
@@ -75,8 +72,9 @@ startBtn.addEventListener("click", () => {
       secondsValue.textContent = addLeadingZero(seconds);
     }
   }, 1000);
-    startBtn.disabled = true;
-    dateTimePicker.disabled = true;
+
+  startBtn.disabled = true;
+  dateTimePicker.disabled = true;
 });
 
 function convertMs(ms) {
